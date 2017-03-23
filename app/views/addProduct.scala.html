@@ -1,0 +1,71 @@
+
+
+@* addProductForm defined above is the parameter passed to this view by the controller *@
+
+@import helper._
+
+@(addProductForm: Form[models.Product],user: models.users.User))
+
+<!-- Pass page title and user on to main -->
+
+@main("Add Products Page", user)  {
+<section>
+  <div class="single-page main-grid-border">
+    <div class="container">
+   
+            <h3>Add a new Product</h3>
+    @form(action = routes.HomeController.addProductSubmit(), 'class -> "form-horizontal", 'role->"form"){
+
+
+@inputText(addProductForm("productID"), '_label -> "Product ID",'class -> "form-control")
+@inputText(addProductForm("product_Name"), '_label -> "Product Name",'class -> "form-control")
+@inputText(addProductForm("Category "), '_label -> "Category",'class -> "form-control")
+@inputText(addProductForm("product_price"), '_label -> "Product Price",'class -> "form-control")
+@inputText(addProductForm("manufacturer"), '_label -> "Manufacturer",'class -> "form-control")
+@inputText(addProductForm("quantity"), '_label -> "Quantity",'class -> "form-control")
+
+@inputText(addProductForm("id"), '_label -> "", 'hidden -> "hidden")
+
+      <div class="row">
+        <div class="col-sm-8">
+              @if(flash.containsKey("success")) {
+              <div class="alert alert-success">
+              @flash.get("success")
+              </div>
+          }
+          <div class="well">
+            <h4>Add Products </h4>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <table class="table table-bordered table-hover table-condensed">
+            <thead>
+                     <div class="actions">
+                         <input type="submit" value="Add Product" class="btn btn-primary">
+                        <a href="@routes.HomeController.addProduct()">
+                            <button class="btn btn-primary">Add Product</button>
+                        </a>
+                    </div>
+            </thead>
+
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <script> 
+  function confirmDelete() {
+    return confirm('Are you sure?');
+  }
+  </script>
+</section>
+
+
+
+}}
